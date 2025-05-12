@@ -15,19 +15,91 @@ public class GameBoard {
   to "[X]".
   */
   public GameBoard(int boardWidth, int boardHeight) {
-    // your code goes here
+    row = 0;
+    col = 0;
+    gameBoard = new String[boardHeight][boardWidth]; // Creates gameBoard based on inputted dimensions
   }
 
   // Prints the game board w/ current player piece location.
   public void printGameBoard() {
-    // your code goes here
+    for (int i = 0; i < gameBoard.length; i++) // iterates through number of rows
+    {
+      for (int j = 0; j < gameBoard[0].length; j++) // iterates through number of columns
+      {
+        if (row == i && col == j)
+        {
+          System.out.print("[X]");
+        }
+        else{
+        System.out.print("[ ]");
+        }
+      }
+      System.out.println();
+    }
+
   }
 
   /* Checks if player can move.  Should be programmed so that
   player cannot move off of board.
   */
   private boolean checkIfCanMove(String moveCommand) {
-    // your code goes here
+    // Checks up movement
+    if (moveCommand.equals("U"))
+    {
+      row--;
+      if (row < 0)
+      {
+        row++;
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
+    // Checks left movement
+    else if (moveCommand.equals("L"))
+    {
+      col--;
+      if (col < 0)
+      {
+        col++;
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
+    // Checks right movement
+    else if (moveCommand.equals("R"))
+    {
+      col++;
+      if (col > gameBoard[0].length - 1)
+      {
+        col--;
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
+    // Checks down movement
+    else if (moveCommand.equals("D"))
+    {
+      row++;
+      if (row > gameBoard.length - 1)
+      {
+        row--;
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
+    return false;
   }
 
   /* Moves player piece on board and makes a call to
@@ -41,6 +113,83 @@ public class GameBoard {
   them know that they cannot make that move.
   */
   public void move(String moveCommand) {
-    // your code goes here
+    boolean moveable = false;
+
+    // No move
+    if (moveCommand.equals("NM")) 
+    {
+      printGameBoard();
+    }
+
+    // Move up
+    else if (moveCommand.equals("U"))
+    {
+      moveable = checkIfCanMove("U");
+      if (moveable == true)
+      {
+        printGameBoard();
+      }
+      else
+      {
+        System.out.println("The move you entered was invalid. Make sure it is one of the accepted moves and contains all capital letters.");
+        printGameBoard();
+        System.out.println();
+      }
+    }
+
+    // Move right
+    else if (moveCommand.equals("R"))
+    {
+      moveable = checkIfCanMove("R");
+      if (moveable == true)
+      {
+        printGameBoard();
+      }
+      else
+      {
+        System.out.println("The move you entered was invalid. Make sure it is one of the accepted moves and contains all capital letters.");
+        printGameBoard();
+        System.out.println();
+      }
+    }
+
+    // Move left
+    else if (moveCommand.equals("L"))
+    {
+      moveable = checkIfCanMove("L");
+      if (moveable == true)
+      {
+        printGameBoard();
+      }
+      else
+      {
+        System.out.println("The move you entered was invalid. Make sure it is one of the accepted moves and contains all capital letters.");
+        printGameBoard();
+        System.out.println();
+      }
+    }
+
+    // Move down
+    else if (moveCommand.equals("D"))
+    {
+      moveable = checkIfCanMove("D");
+      if (moveable == true)
+      {
+        printGameBoard();
+
+      }
+      else
+      {
+        System.out.println("The move you entered was invalid. Make sure it is one of the accepted moves and contains all capital letters.");
+        printGameBoard();
+        System.out.println();
+      }
+    }
+
+    else
+    {
+      System.out.println("This move is not recognized. Make sure it is one of the accepted moves and contains all capital letters.");
+      System.out.println();
+    }
   }
 }
